@@ -31,7 +31,12 @@ public class InsertarProducto extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+		GestorBDD GDBB=new GestorBDD();
+		GDBB.abrirConexion();
+		ArrayList<modelo.DAO.Seccion> secciones = GDBB.SELECTALLSecciones();
+		GDBB.cerrarConexion();
+		request.setAttribute("secciones", secciones);
 		request.getRequestDispatcher("InsertarProducto.jsp").forward(request, response);
 	}
 

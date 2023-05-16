@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <title>Insert title here</title>
 </head>
 <body>
@@ -31,5 +32,18 @@
 			
 		<input type="submit" name="inset"value="inset" />
 	</form>
+	
+	
+	<table>
+	<c:forEach items="${secciones}" var="seccion">
+		<tr>
+			<th>${seccion.getId() }</th>
+		
+			<th>${seccion.getNombre() }</th>
+			
+			
+		</tr>
+	</c:forEach>
+	</table>
 </body>
 </html>
