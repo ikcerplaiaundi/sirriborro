@@ -1,5 +1,6 @@
 package modelo.DTO;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -64,7 +65,7 @@ public class GestorBDD extends Conexion {
 			PSPoduct.setString(3, prod.getNombre());
 			PSPoduct.setInt(4, prod.getCantidad());
 			PSPoduct.setDouble(5, prod.getPrecio());
-			PSPoduct.setString(6, prod.getStringdate());
+			PSPoduct.setDate(6, new Date( prod.getdate().getTime()));
 			PSPoduct.setInt(7, prod.getId_seccion());
 			
 			PSPoduct.execute();
