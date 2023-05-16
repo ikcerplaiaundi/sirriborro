@@ -31,8 +31,8 @@ public class GestorBDD extends Conexion {
 				Prod.setNombre(resultSet.getString("nombre"));
 				Prod.setCantidad(resultSet.getInt("cantidad"));
 				Prod.setPrecio(resultSet.getDouble("precio"));
-				System.out.println(resultSet.getInt("id"));
-				
+				Prod.setdate(resultSet.getString("caducidad"));
+				Prod.setId_seccion(resultSet.getInt("id_seccion"));
 
 				Productos.add(Prod);
 
@@ -45,5 +45,14 @@ public class GestorBDD extends Conexion {
 			e.printStackTrace();
 		}
 		return Productos;
+	}
+
+	public void insertProcucto(Producto prod) {
+		String INSERTPoduct = "INSERT INTO productos (id, codigo, nombre, cantidad, precio, caducidad, id_seccion) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		PreparedStatement PSPoduct = super.cn.prepareStatement(INSERTPoduct);
+
+		
+		PSPoduct.setString(1, prod.getId());
+		
 	}
 }
