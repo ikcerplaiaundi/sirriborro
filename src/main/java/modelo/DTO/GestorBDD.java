@@ -50,7 +50,7 @@ public class GestorBDD extends Conexion {
 	}
 
 	public void insertProcucto(Producto prod) {
-		String INSERTPoduct = "INSERT INTO productos (id, codigo, nombre, cantidad, precio, caducidad, id_seccion) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		String INSERTPoduct = "INSERT INTO productos ( codigo, nombre, cantidad, precio, caducidad, id_seccion) VALUES ( ?, ?, ?, ?, ?, ?)";
 		
 
 		
@@ -60,7 +60,7 @@ public class GestorBDD extends Conexion {
 
 			
 			
-			PSPoduct.setInt(1, prod.getId());
+			
 			PSPoduct.setString(2, prod.getCodigo());
 			PSPoduct.setString(3, prod.getNombre());
 			PSPoduct.setInt(4, prod.getCantidad());
@@ -71,7 +71,7 @@ public class GestorBDD extends Conexion {
 			PSPoduct.execute();
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
