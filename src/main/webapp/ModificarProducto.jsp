@@ -15,7 +15,9 @@
 		<c:forEach items="${productos}" var="producto">
 		<form action="ModificarProducto" method="post">
 
-
+		
+		<label for="id">codigo</label> 
+		<input type="text" name="codigo" id=""value="${producto.getId()}"
 		
 		<label for="id">codigo</label> 
 		<input type="text" name="codigo" id=""value="${producto.getCodigo()}"
@@ -36,8 +38,8 @@
 				<option value="${seccion.getId() }">${seccion.getNombre()}</option>
 			</c:forEach>
 		</select> 
+		<input type="submit" name="inset" value="inset" />ç
 		
-		<input type="submit" name="inset" value="inset" />
 		</form>
 
 
