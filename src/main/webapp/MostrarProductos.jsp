@@ -22,7 +22,7 @@
 			<td>${producto.getPrecio() }</td>
 			<td>${producto.getDate()}</td>
 			<td>${producto.getId_seccion()}</td>
-			
+			<a href="ModificarProducto?=${producto.getId()}">MODIFICAR</a>
 		</tr>
 	</c:forEach>
 	</table>
