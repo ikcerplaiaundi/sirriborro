@@ -112,14 +112,6 @@ public class Producto {
 			this.precio = precio;
 		}
 
-		public Date getDate() {
-			return date;
-		}
-
-		public void setDate(Date date) {
-			this.date = date;
-		}
-
 		public int getId_seccion() {
 			return id_seccion;
 		}

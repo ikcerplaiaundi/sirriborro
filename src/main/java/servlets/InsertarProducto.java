@@ -85,8 +85,14 @@ public class InsertarProducto extends HttpServlet {
 		precioPositivo(request, prod, check);
 		noPastDate(request, prod, check);
 		sectionRequired(request, prod, check);
-
-		if (!(check.toString().contains("false"))) {
+		System.out.println(check.toString().contains("false"));
+		
+		
+		boolean todobien=true;
+		for(boolean comprobacion :check) {
+			if(!comprobacion) {todobien=false;}
+		}
+		if (todobien) {
 			GDBB.abrirConexion();
 			GDBB.insertProcucto(prod);
 			GDBB.cerrarConexion();
@@ -109,13 +115,14 @@ public class InsertarProducto extends HttpServlet {
 	private void noPastDate(HttpServletRequest request, Producto prod, boolean[] check) {
 		
 		try {
+			System.out.println("caducidad: "+request.getParameter("caducidad"));
 			if ((request.getParameter("caducidad") != null)) {
 				if(((Date) prod.getSimpleDateFormat().parse(request.getParameter("caducidad"))).before(new Date())){
 					
 					request.setAttribute("mensageError", "fecha futura requerida");
 				}	
 				else {
-					prod.setdate(request.getParameter("caducidad"));
+					prod.setdate((Date) prod.getSimpleDateFormat().parse(request.getParameter("caducidad")));
 					check[5] = true;
 			 	}
 			}

@@ -50,6 +50,7 @@ public class GestorBDD extends Conexion {
 	}
 
 	public void insertProcucto(Producto prod) {
+		
 		String INSERTPoduct = "INSERT INTO productos ( codigo, nombre, cantidad, precio, caducidad, id_seccion) VALUES ( ?, ?, ?, ?, ?, ?)";
 		
 
@@ -61,12 +62,12 @@ public class GestorBDD extends Conexion {
 			
 			
 			
-			PSPoduct.setString(2, prod.getCodigo());
-			PSPoduct.setString(3, prod.getNombre());
-			PSPoduct.setInt(4, prod.getCantidad());
-			PSPoduct.setDouble(5, prod.getPrecio());
-			PSPoduct.setDate(6, new Date( prod.getdate().getTime()));
-			PSPoduct.setInt(7, prod.getId_seccion());
+			PSPoduct.setString(1, prod.getCodigo());
+			PSPoduct.setString(2, prod.getNombre());
+			PSPoduct.setInt(3, prod.getCantidad());
+			PSPoduct.setDouble(4, prod.getPrecio());
+			PSPoduct.setDate(5, new Date(prod.getdate().getTime()));
+			PSPoduct.setInt(6, prod.getId_seccion());
 			
 			PSPoduct.execute();
 			
@@ -107,6 +108,32 @@ public class GestorBDD extends Conexion {
 			e.printStackTrace();
 		}
 		return Seccions;
+		
+	}
+
+	public void updateProcucto(Producto prod) {
+		//UPDATE productos SET codigo=?,nombre=?,cantidad=?,precio=?,caducidad=?,id_seccion=? WHERE id=?
+		String updatePoduct = "UPDATE productos SET codigo=?,nombre=?,cantidad=?,precio=?,caducidad=?,id_seccion=? WHERE id=?";
+		
+
+		
+		try {
+			PreparedStatement PSPoduct = super.cn.prepareStatement(updatePoduct);
+			
+			PSPoduct.setString(1, prod.getCodigo());
+			PSPoduct.setString(2, prod.getNombre());
+			PSPoduct.setInt(3, prod.getCantidad());
+			PSPoduct.setDouble(4, prod.getPrecio());
+			PSPoduct.setDate(5, new Date( prod.getdate().getTime()));
+			PSPoduct.setInt(6, prod.getId_seccion());
+			PSPoduct.setInt(7, prod.getId());
+			
+			PSPoduct.execute();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
 		
 	}
 }

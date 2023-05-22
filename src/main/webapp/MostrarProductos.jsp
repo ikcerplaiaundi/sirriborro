@@ -10,7 +10,13 @@
 </head>
 <body>
 	<h1>hola mundo</h1>
+	<form action="MostrarProductos" method="post">
 
+		
+		<label for="id">codigo</label> 
+		<input type="text" name="filtro" id="">
+		<input type="submit" name="inset" value="inset" />
+		</form>
 
 	<table>
 	<c:forEach items="${productos}" var="producto">
@@ -20,15 +26,15 @@
 			<td>${producto.getNombre() }</td>
 			<td>${producto.getCantidad()}</td>
 			<td>${producto.getPrecio() }</td>
-			<td>${producto.getDate()}</td>
-			<td>${producto.getId_seccion()}</td>
-			<a href="ModificarProducto?=${producto.getId()}">MODIFICAR</a>
+			<td>${producto.getdate()}</td>
+			<td>${producto.getId_seccion()}</td> 
+			
 		</tr>
 	</c:forEach>
 	</table>
 
 
 <a href="InsertarProducto">insertar nuevo</a>
-
+<a href="ModificarProducto">MODIFICAR</a>
 </body>
 </html>
