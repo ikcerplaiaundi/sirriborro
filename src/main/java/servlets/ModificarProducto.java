@@ -113,6 +113,7 @@ public class ModificarProducto extends HttpServlet {
 		
 		try {
 			if ((request.getParameter("caducidad") != null)) {
+				
 				if(((Date) prod.getSimpleDateFormat().parse(request.getParameter("caducidad"))).before(new Date())){
 					
 					request.setAttribute("mensageError", "fecha futura requerida");
