@@ -9,17 +9,30 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>hola mundo</h1>
-	<form action="MostrarProductos" method="post">
-
-		
-		<label for="id">codigo</label> 
-		<input type="text" name="filtro" id="">
-		<input type="submit" name="inset" value="inset" />
+	
+	<form action="MostrarProductos" method="get">
+		<input type="text" name="filtro" id="" value="${filtro}">
+		<input type="submit" name="buscar" value="buscar" /><br>
+		<label>precioMin</label>
+		<input type="text" name="precioMin" id="" value="${precioMin}">
+		<label>precioMax</label>
+		<input type="text" name="precioMax" id="" value="${precioMax}">
+		<input type="submit" name="submit" value="codigo_asc" />
+		<input type="submit" name="submit" value="codigo_desc" />
 		</form>
 
 	<table>
-	<c:forEach items="${productos}" var="producto">
+		<tr>
+			<td>Id()</td>
+			<td>Codigo</td>
+			<td>Nombre</td>
+			<td>Cantidad()</td>
+			<td>Precio</td>
+			<td>caducidad</td>
+			<td>Id_seccion</td> 
+			
+		</tr>
+	<c:forEach items="${filtrados}" var="producto">
 		<tr>
 			<td>${producto.getId() }</td>
 			<td>${producto.getCodigo()}</td>
@@ -31,6 +44,7 @@
 			
 		</tr>
 	</c:forEach>
+	
 	</table>
 
 
