@@ -11,7 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 
 import modelo.DAO.Producto;
 import modelo.DTO.GestorBDD;
@@ -102,8 +102,13 @@ public class MostrarProductos extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		doGet(request, response);
+		String idproducto = request.getParameter("supermercado");
+		if(idproducto!=null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("idproducto", idproducto);
+			response.sendRedirect("SelectMercado");
+		}else {doGet(request, response);}
+		
 	}
 
 }

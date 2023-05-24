@@ -19,7 +19,7 @@
 		<input type="text" name="precioMax" id="" value="${precioMax}">
 		<input type="submit" name="submit" value="codigo_asc" />
 		<input type="submit" name="submit" value="codigo_desc" />
-		</form>
+	</form>
 
 	<table>
 		<tr>
@@ -40,7 +40,11 @@
 			<td>${producto.getCantidad()}</td>
 			<td>${producto.getPrecio() }</td>
 			<td>${producto.getdate()}</td>
-			<td>${producto.getId_seccion()}</td> 
+			<td>${producto.getId_seccion()}</td>
+			
+			<td><form action="MostrarProductos" method="post">
+			<input type="submit" name="supermercado" value="${producto.getId() }" />
+			</form></td>
 			
 		</tr>
 	</c:forEach>
@@ -49,6 +53,7 @@
 
 
 <a href="InsertarProducto">insertar nuevo</a>
-<a href="ModificarProducto">MODIFICAR</a>
+<a href="InsertarProducto"></a>
+
 </body>
 </html>
