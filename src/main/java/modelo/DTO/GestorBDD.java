@@ -169,12 +169,12 @@ public class GestorBDD extends Conexion {
 	}
 
 	public ArrayList<Mercado> SELECTALLMercados() {
-		String SELECTALLMercado = "SELECT * FROM supermercados ";
+		String SELECTALLMercado = "SELECT * FROM  	supermercados  ";
 
 		ArrayList<modelo.DAO.Mercado> mercados = new ArrayList<modelo.DAO.Mercado>();
 
 		try {
-			Mercado merca = new Mercado();
+			Mercado merca ;
 			PreparedStatement SELECTALLProd = super.cn.prepareStatement(SELECTALLMercado);
 			ResultSet resultSet = SELECTALLProd.executeQuery(SELECTALLMercado);
 
@@ -189,7 +189,7 @@ public class GestorBDD extends Conexion {
 
 			}
 
-			merca.setNombre(resultSet.getString("nombre"));
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -197,18 +197,18 @@ public class GestorBDD extends Conexion {
 		return mercados;
 	}
 
-	public ArrayList<Mercado> SELECTALLMercados(int id) {
-		String SELECTALLMercado = "SELECT * FROM productos_supermercados where id_producto =" + id;
+	public ArrayList<Mercado> SELECTALLMercadosRelacionados(int id) {
+		String SELECTALLMercado = "SELECT * FROM productos_supermercados where id_producto = " + id;
 
 		ArrayList<modelo.DAO.Mercado> mercados = new ArrayList<modelo.DAO.Mercado>();
 
 		try {
-			Mercado merca = new Mercado();
+			Mercado merca ;
 			PreparedStatement SELECTALLProd = super.cn.prepareStatement(SELECTALLMercado);
 			ResultSet resultSet = SELECTALLProd.executeQuery(SELECTALLMercado);
 
 			while (resultSet.next()) {
-
+				merca = new Mercado();
 				merca = SELECTALLMercado(resultSet.getInt("id_supermercado"));
 
 				mercados.add(merca);

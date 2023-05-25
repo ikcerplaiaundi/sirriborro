@@ -46,7 +46,9 @@
 			</tr>
 			
 		</c:forEach>
+		
 	</table>
+	<input type="submit" name="mercados a asignar" value="submit" />
 </form>
 </body>
 </html>

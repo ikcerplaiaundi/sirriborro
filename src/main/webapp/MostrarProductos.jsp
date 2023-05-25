@@ -43,7 +43,7 @@
 			<td>${producto.getId_seccion()}</td>
 			
 			<td><form action="MostrarProductos" method="post">
-			<input type="submit" name="supermercado" value="${producto.getId() }" />
+			<input type="submit" name="supermercado" value="${producto.getId()}" />
 			</form></td>
 			
 		</tr>
