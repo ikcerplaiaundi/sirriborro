@@ -43,7 +43,12 @@
 			<td>${producto.getId_seccion()}</td>
 			
 			<td><form action="MostrarProductos" method="post">
-			<input type="submit" name="supermercado" value="${producto.getId()}" />
+			<input type="hidden" name="supermercado"  value="${producto.getId()}" />
+			<input type="submit" name="supermercadoBoton"  value="supermercados relacionados" />
+			</form></td>
+			<td><form action="MostrarProductos" method="post">
+			<input type="hidden" name="eliminarespeial" value="${producto.getId()}" />
+			<input type="submit" name="eliminarespeialBoton" value="eliminarespeial" />
 			</form></td>
 			
 		</tr>
@@ -53,7 +58,7 @@
 
 
 <a href="InsertarProducto">insertar nuevo</a>
-<a href="InsertarProducto"></a>
+
 
 </body>
 </html>

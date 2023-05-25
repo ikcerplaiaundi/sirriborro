@@ -54,7 +54,7 @@ public class SelectMercado extends HttpServlet {
 			
 			ArrayList<modelo.DAO.Mercado> mercados = GDBB.SELECTALLMercados();
 			
-			ArrayList<modelo.DAO.Mercado> mercadosProducto = GDBB.SELECTALLMercadosRelacionados(producto.getId());
+			ArrayList<modelo.DAO.Mercado> mercadosProducto = GDBB.selectAllMercadosRelacionados(producto.getId());
 			GDBB.cerrarConexion();
 			ArrayList<modelo.DAO.Mercado> mercadosSinProducto = new ArrayList<Mercado>();
 

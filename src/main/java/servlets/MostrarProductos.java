@@ -109,6 +109,30 @@ public class MostrarProductos extends HttpServlet {
 			response.sendRedirect("SelectMercado");
 		}else {doGet(request, response);}
 		
+		
+		String idproductoeliminar = request.getParameter("eliminarespeial");
+		if(idproductoeliminar!=null) {
+			
+			GestorBDD GDBB = new GestorBDD();
+			Producto producto=new Producto(); 
+			producto.setId(Integer.parseInt(idproductoeliminar));
+			
+			GDBB.abrirConexion();
+			producto = GDBB.SELECTPoducto(producto.getId());
+			
+			if(producto.getCantidad()==0) {
+				ArrayList<modelo.DAO.Mercado> mercadosProducto = GDBB.selectAllMercadosRelacionados(producto.getId());
+				if(mercadosProducto.size()==0) {
+					GDBB.DELETEProducto(producto);
+				}else {
+					GDBB.DELETEMercadosRelacion(producto);
+				}
+			}else {
+				GDBB.productoDisminulle(producto);
+			}GDBB.cerrarConexion();
+			doGet(request, response);
+		}else {doGet(request, response);}
+		
 	}
 
 }

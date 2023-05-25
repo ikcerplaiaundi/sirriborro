@@ -197,7 +197,7 @@ public class GestorBDD extends Conexion {
 		return mercados;
 	}
 
-	public ArrayList<Mercado> SELECTALLMercadosRelacionados(int id) {
+	public ArrayList<Mercado> selectAllMercadosRelacionados(int id) {
 		String SELECTALLMercado = "SELECT * FROM productos_supermercados where id_producto = " + id;
 
 		ArrayList<modelo.DAO.Mercado> mercados = new ArrayList<modelo.DAO.Mercado>();
@@ -224,7 +224,7 @@ public class GestorBDD extends Conexion {
 	}
 
 	public void INSETproductos_supermercados(int i, String idmercado) {
-		// TODO Auto-generated method stub INSERT INTO `productos_supermercados` (`id`, `id_producto`, `id_supermercado`) VALUES ('1', '1', '1');
+		//  INSERT INTO `productos_supermercados` (`id`, `id_producto`, `id_supermercado`) VALUES ('1', '1', '1');
 		String INSERTPoduct_supermercados = "INSERT INTO productos_supermercados (id_producto, id_supermercado) VALUES (?,?)";
 
 		try {
@@ -241,4 +241,58 @@ public class GestorBDD extends Conexion {
 			e.printStackTrace();
 		}
 	}
+
+	public void DELETEProducto(Producto producto) {
+		// DELETE FROM `productos` WHERE 0
+		String DELETEPoduct = "DELETE FROM productos WHERE id = ?";
+
+		try {
+			PreparedStatement PSPoduct = super.cn.prepareStatement(DELETEPoduct);
+
+			PSPoduct.setInt(1, producto.getId());
+			PSPoduct.execute();
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+	}
+
+	public void DELETEMercadosRelacion(Producto producto) {
+		
+			String DELETEPoduct = "DELETE FROM productos_supermercados WHERE id_producto = ?";
+
+		try {
+			PreparedStatement PSPoduct = super.cn.prepareStatement(DELETEPoduct);
+
+			PSPoduct.setInt(1, producto.getId());
+			PSPoduct.execute();
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		
+		
+		
+	}
+
+	public void productoDisminulle(Producto producto) {
+		// UPDATE `productos` SET `id`='[value-1]',`codigo`='[value-2]',`nombre`='[value-3]',`cantidad`='[value-4]',`precio`='[value-5]',`caducidad`='[value-6]',`id_seccion`='[value-7]' WHERE 1
+		String DELETEPoduct = " UPDATE productos SET cantidad= ? WHERE id = ?";
+
+		try {
+			PreparedStatement PSPoduct = super.cn.prepareStatement(DELETEPoduct);
+			PSPoduct.setInt(1, (producto.getCantidad()-1));
+			PSPoduct.setInt(2, producto.getId());
+			PSPoduct.execute();
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+	}
+
+	
+
 }
