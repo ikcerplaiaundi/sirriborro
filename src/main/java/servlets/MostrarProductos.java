@@ -107,7 +107,7 @@ public class MostrarProductos extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("idproducto", idproducto);
 			response.sendRedirect("SelectMercado");
-		}else {doGet(request, response);}
+		}
 		
 		
 		String idproductoeliminar = request.getParameter("eliminarespeial");
@@ -130,8 +130,10 @@ public class MostrarProductos extends HttpServlet {
 			}else {
 				GDBB.productoDisminulle(producto);
 			}GDBB.cerrarConexion();
-			doGet(request, response);
-		}else {doGet(request, response);}
+			
+		}
+		
+		doGet(request, response);
 		
 	}
 
