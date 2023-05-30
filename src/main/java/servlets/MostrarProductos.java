@@ -103,38 +103,100 @@ public class MostrarProductos extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String idproducto = request.getParameter("supermercado");
-		if(idproducto!=null) {
+		if (idproducto != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("idproducto", idproducto);
 			response.sendRedirect("SelectMercado");
 		}
-		
-		
-		String idproductoeliminar = request.getParameter("eliminarespeial");
-		if(idproductoeliminar!=null) {
-			
+
+		String idProductoEliminar = request.getParameter("eliminarespeial");
+		if (idProductoEliminar != null) {
+
 			GestorBDD GDBB = new GestorBDD();
-			Producto producto=new Producto(); 
-			producto.setId(Integer.parseInt(idproductoeliminar));
-			
+			Producto producto = new Producto();
+			producto.setId(Integer.parseInt(idProductoEliminar));
+
 			GDBB.abrirConexion();
 			producto = GDBB.SELECTPoducto(producto.getId());
-			
-			if(producto.getCantidad()==0) {
+
+			if (producto.getCantidad() == 0) {
 				ArrayList<modelo.DAO.Mercado> mercadosProducto = GDBB.selectAllMercadosRelacionados(producto.getId());
-				if(mercadosProducto.size()==0) {
+				if (mercadosProducto.size() == 0) {
 					GDBB.DELETEProducto(producto);
-				}else {
+				} else {
 					GDBB.DELETEMercadosRelacion(producto);
 				}
-			}else {
+			} else {
 				GDBB.productoDisminulle(producto);
-			}GDBB.cerrarConexion();
-			
+			}
+			GDBB.cerrarConexion();
+
 		}
-		
+
+		String idsProductosEliminar = request.getParameter("stringIdProductos");
+		if (idsProductosEliminar != null) {
+			String[] idlist = idsProductosEliminar.split(",");
+			HttpSession session = request.getSession();
+
+			// es numero?
+			boolean numerico = true;
+			for (String string : idlist) {
+				try {
+					Integer.parseInt(string);
+				} catch (Exception e) {
+					numerico = false;
+					session.setAttribute("mensageStringIdProductos", "(" + string + ") no reconocible");
+					e.addSuppressed(e);
+				}
+			}
+			if (numerico) {
+
+				GestorBDD GDBB = new GestorBDD();
+				GDBB.abrirConexion();
+				ArrayList<Producto> productos = GDBB.SELECTALLPoducto();
+				GDBB.cerrarConexion();
+
+				ArrayList<Producto> productosEliminar = new ArrayList<Producto>();
+
+				boolean[] todoEncontrado = new boolean[idlist.length];
+				for (boolean b : todoEncontrado) {
+					b = false;
+				}
+				int i = 0;
+				for (String idString : idlist) {
+					for (Producto producto : productos) {
+						if (producto.getId() == Integer.parseInt(idString)) {
+							todoEncontrado[i] = true;
+							productosEliminar.add(producto);
+						}
+					}
+					i++;
+				}
+
+				boolean encontrado = true;
+				for (int o = 0; i >= todoEncontrado.length; o++) {
+					if (todoEncontrado[o] == false) {
+						encontrado = todoEncontrado[o];
+					}
+				}
+
+				if (encontrado) {
+					for (Producto producto : productosEliminar) {
+						GDBB.abrirConexion();
+						GDBB.DELETEMercadosRelacion(producto);
+						GDBB.DELETEProducto(producto);
+						GDBB.cerrarConexion();
+					}
+
+				}else {
+					session.setAttribute("mensageStringIdProductos", "multiples no encontrados");
+				}
+
+			}
+		}
+
 		doGet(request, response);
-		
+
 	}
 
 }

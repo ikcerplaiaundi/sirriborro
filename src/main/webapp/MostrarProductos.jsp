@@ -55,7 +55,12 @@
 	</c:forEach>
 	
 	</table>
-
+	<c:if test="${session.mensageStringIdProductos != null}"> <span>${session.mensageStringIdProductos}</span> </c:if>
+	<c:if test="${session.mensageStringIdProductos == null}"> <span>id de producto "," otroid de producto, sin espacios</span> </c:if>
+	<form action="MostrarProductos" method="post">
+	<input type="text" name="stringIdProductos"  value="" />
+	<input type="submit" name="eliminarLista"  value="eliminarLista" />
+	</form>
 
 <a href="InsertarProducto">insertar nuevo</a>
 
